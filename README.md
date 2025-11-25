@@ -20,9 +20,10 @@ This repository serves as a hands-on learning project for FastAPI, including pra
 
 ### Project 3
 
-- Database and ORM
+- SQL Database and ORM
 - Authentication JWT
 - Routing
+- Hashing Passwords
 
 ### Project 3.5
 
