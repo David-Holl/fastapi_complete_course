@@ -2,15 +2,10 @@ from typing import Annotated, Generator
 from fastapi import Depends
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase, Session
-
-DATABASE_URL = (
-    "postgresql://admin:supersecretpassword@localhost/TodoApplicationDatabase"
-)
+from project_3.TodoApp.core.config import DATABASE_URL
 
 
-engine = create_engine(
-    DATABASE_URL,
-)
+engine = create_engine(DATABASE_URL)
 
 SessionLocal = sessionmaker(
     autocommit=False,

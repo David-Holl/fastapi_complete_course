@@ -1,5 +1,5 @@
 from typing import Annotated
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 from starlette import status
 
@@ -10,7 +10,7 @@ from project_3.TodoApp.schemas.token import Token
 from project_3.TodoApp.schemas.users import CreateUserRequest
 from project_3.TodoApp.database import db_dependency
 from project_3.TodoApp.core.security import bcrypt_context, create_access_token
-from project_3.TodoApp.services.user_service import authenticate_user
+from project_3.TodoApp.services.user_service import UserService
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -38,11 +38,11 @@ async def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
     db: db_dependency,
 ) -> Token | str:
-    user = authenticate_user(form_data.username, form_data.password, db)
-    if not isinstance(user, Users):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="Could not validate user."
-        )
+    user = UserService.authenticate(
+        form_data.username,
+        form_data.password,
+        db,
+    )
     token = create_access_token(
         username=user.username,
         user_id=user.id,
