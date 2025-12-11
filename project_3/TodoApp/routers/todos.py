@@ -1,14 +1,14 @@
 from fastapi import APIRouter, HTTPException, Path
-from project_3.TodoApp.schemas import todo
-from project_3.TodoApp.orm_models.todos import Todos
+from project_3.TodoApp.schemas import todos_schema
+from project_3.TodoApp.models.todos_orm import Todos
 from project_3.TodoApp.database import db_dependency
 from project_3.TodoApp.core.security import user_dependency
-from starlette import status
+from fastapi import status
 
 router = APIRouter(tags=["todo"])
 
 
-@router.get("/", response_model=list[todo.TodoRead], status_code=200)
+@router.get("/", response_model=list[todos_schema.TodoRead], status_code=200)
 async def read_all(user: user_dependency, db: db_dependency) -> list[Todos]:
     if user is None:
         raise HTTPException(
@@ -18,7 +18,7 @@ async def read_all(user: user_dependency, db: db_dependency) -> list[Todos]:
     return db.query(Todos).filter(Todos.owner_id == user.get("id")).all()
 
 
-@router.get("/todo/{todo_id}", response_model=todo.TodoRead, status_code=200)
+@router.get("/todo/{todo_id}", response_model=todos_schema.TodoRead, status_code=200)
 async def read_todo(
     user: user_dependency,
     db: db_dependency,
@@ -44,7 +44,7 @@ async def read_todo(
 async def create_todo(
     user: user_dependency,
     db: db_dependency,
-    todo_request: todo.TodoRequest,
+    todo_request: todos_schema.TodoRequest,
 ) -> None:
     if user is None:
         raise HTTPException(
@@ -60,7 +60,7 @@ async def create_todo(
 async def update_todo(
     user: user_dependency,
     db: db_dependency,
-    todo_request: todo.TodoRequest,
+    todo_request: todos_schema.TodoRequest,
     todo_id: int = Path(gt=0),
 ) -> None:
     if user is None:

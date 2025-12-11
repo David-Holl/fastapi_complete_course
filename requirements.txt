@@ -2,7 +2,6 @@ bcrypt==4.0.1
 cryptography
 fastapi
 psycopg2-binary
-PyMySQL
 python-jose
 python-multipart
 SQLAlchemy
@@ -15,3 +14,5 @@ pytest-asyncio
 aiofiles
 jinja2
 alembic
+python-jose
+types-python-jose

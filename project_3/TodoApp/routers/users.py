@@ -1,13 +1,13 @@
 from fastapi import APIRouter
 from project_3.TodoApp.core.security import user_dependency
 from project_3.TodoApp.database import db_dependency
-from project_3.TodoApp.orm_models.users import Users
-from project_3.TodoApp.schemas.users import (
+from project_3.TodoApp.models.users_orm import Users
+from project_3.TodoApp.schemas.users_schema import (
     ChangePasswordRequest,
     ChangePhoneNumberRequest,
     UserRead,
 )
-from starlette import status
+from fastapi import status
 
 from project_3.TodoApp.services.user_service import UserService
 

@@ -1,13 +1,13 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
-from starlette import status
+from fastapi import status
 
 from project_3.TodoApp.core.config import ACCESS_TOKEN_EXPIRE_MINUTES
 from project_3.TodoApp.enum.roles import UserRole
-from project_3.TodoApp.orm_models.users import Users
-from project_3.TodoApp.schemas.token import Token
-from project_3.TodoApp.schemas.users import CreateUserRequest
+from project_3.TodoApp.models.users_orm import Users
+from project_3.TodoApp.schemas.token_schema import Token
+from project_3.TodoApp.schemas.users_schema import CreateUserRequest
 from project_3.TodoApp.database import db_dependency
 from project_3.TodoApp.core.security import bcrypt_context, create_access_token
 from project_3.TodoApp.services.user_service import UserService

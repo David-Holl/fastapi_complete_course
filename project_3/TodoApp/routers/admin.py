@@ -1,10 +1,10 @@
 from fastapi import APIRouter, HTTPException, Path
-from starlette import status
+from fastapi import status
 from project_3.TodoApp.enum.roles import UserRole
-from project_3.TodoApp.orm_models.todos import Todos
+from project_3.TodoApp.models.todos_orm import Todos
 from project_3.TodoApp.core.security import user_dependency
 from project_3.TodoApp.database import db_dependency
-from project_3.TodoApp.schemas.todo import TodoRead
+from project_3.TodoApp.schemas.todos_schema import TodoRead
 
 router = APIRouter(
     prefix="/admin",

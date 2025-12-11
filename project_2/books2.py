@@ -1,7 +1,7 @@
 import datetime
 from fastapi import FastAPI, Path, Query, HTTPException
 from pydantic import BaseModel, Field
-from starlette import status
+from fastapi import status
 
 
 app = FastAPI()

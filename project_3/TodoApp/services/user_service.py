@@ -1,8 +1,8 @@
 from fastapi import HTTPException
-from project_3.TodoApp.orm_models.users import Users
+from project_3.TodoApp.models.users_orm import Users
 from sqlalchemy.orm import Session
 from project_3.TodoApp.core.security import bcrypt_context
-from starlette import status
+from fastapi import status
 
 
 class UserService:
