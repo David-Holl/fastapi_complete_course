@@ -39,7 +39,6 @@ def make_user(
     last_name: str | None = None,
     is_active: bool | None = None,
     role: UserRole = UserRole.USER,
-    persist: bool = False,
 ) -> Users:
     defaults = UserDefaults()
     raw_pw = password or defaults.password
@@ -56,7 +55,6 @@ def make_user(
     )
     db.add(user)
     db.flush()
-
     return user
 
 
@@ -68,7 +66,6 @@ def seed_users(
 ) -> list[Users]:
     if n < 0:
         raise ValueError("n must be >= 0")
-
     users = [make_user(db) for _ in range(n)]
     return users
 
@@ -94,7 +91,6 @@ def make_todo(
     )
     db.add(todo)
     db.flush()
-
     return todo
 
 
@@ -103,8 +99,5 @@ def seed_todos(
 ) -> list[Todos]:
     if n < 0:
         raise ValueError("n must be >= 0")
-
     todos = [make_todo(db, owner_id=owner_id) for _ in range(n)]
-    db.flush()
-
     return todos
